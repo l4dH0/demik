@@ -1,0 +1,13 @@
+- name: получение данных с хоста
+  hosts:
+    - hq-srv
+    - hq-cli
+  gather_facts: yes
+  tasks:
+    - name: sozdat otchet s info o rabohemk meste
+      delegate_to: localhost
+      copy:
+        dest: "/etc/ansible/PC-INFO/{{ ansible_hostname }}.yml"
+        content: |
+          Hostname: {{ ansible_hostname }}
+          IP_Address: {{ ansible_default_ipv4.address }}
